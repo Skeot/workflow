@@ -3,6 +3,8 @@ var gulp = require("gulp"),
 	browserify = require("gulp-browserify"),
 	connect = require("gulp-connect"),
 	concat = require("gulp-concat"),
+	gulpif = require("gulp-if"),
+	uglify = require("gulp-uglify"),
 	sass = require("gulp-sass");
 
 var env,
@@ -36,6 +38,7 @@ gulp.task("js", function() {
 	return gulp.src(jsSources)
 		.pipe(concat("main.js"))
 		.pipe(browserify())
+		.pipe(gulpif(env === "production", uglify()))
 		.pipe(gulp.dest(outputDir + "js"))
 		.pipe(connect.reload())
 });

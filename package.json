@@ -16,7 +16,9 @@
     "gulp-browserify": "^0.5.1",
     "gulp-concat": "^2.6.1",
     "gulp-connect": "^5.0.0",
+    "gulp-if": "^2.0.2",
     "gulp-sass": "^3.1.0",
+    "gulp-uglify": "^3.0.0",
     "gulp-util": "^3.0.8",
     "jquery": "^3.2.1",
     "jquery-browserify": "^1.8.1"
