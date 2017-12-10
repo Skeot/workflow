@@ -1,3 +1,6 @@
+// To run the server type this: $ gulp
+// Run production in terminal like this: $ NODE_ENV=production gulp
+
 var gulp = require("gulp"),
 	gutil = require("gulp-util"),
 	connect = require("gulp-connect"),
@@ -15,8 +18,6 @@ var env,
 	sassStyle;
 
 env = process.env.NODE_ENV || "development";
-
-// Run production in terminal like this: $ NODE_ENV=production gulp
 
 if (env === "development") {
 	outputDir = "builds/development/";
