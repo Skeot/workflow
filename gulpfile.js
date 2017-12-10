@@ -11,6 +11,7 @@ var jsSources = [
 ];
 
 var sassSources = ["components/sass/style.scss"];
+var htmlSources = ["builds/development/*.html"];
 
 gulp.task("js", function() {
 	return gulp.src(jsSources)
@@ -31,7 +32,7 @@ gulp.task("sass", function() {
 gulp.task("watch", function() {
 	gulp.watch(jsSources, ["js"]);
 	gulp.watch("components/sass/*.scss", ["sass"]);
-	// gulp.watch();
+	gulp.watch(htmlSources, ["html"]);
 });
 
 gulp.task("connect", function() {
@@ -41,5 +42,10 @@ gulp.task("connect", function() {
 	})
 });
 
-gulp.task("default", ["js", "sass", "connect", "watch"])
+gulp.task("html", function() {
+	gulp.src(htmlSources)
+	.pipe(connect.reload())
+});
+
+gulp.task("default", ["html", "js", "sass", "connect", "watch"])
 
