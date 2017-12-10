@@ -5,27 +5,46 @@ var gulp = require("gulp"),
 	concat = require("gulp-concat"),
 	sass = require("gulp-sass");
 
-var jsSources = [
+var env,
+	jsSources,
+	sassSources,
+	htmlSources,
+	outputDir,
+	sassStyle;
+
+env = process.env.NODE_ENV || "development";
+
+// Run production in terminal like this: $ NODE_ENV=production gulp
+
+if (env === "development") {
+	outputDir = "builds/development/";
+	sassStyle = "expanded";
+} else {
+	outputDir = "builds/production/";
+	sassStyle = "compressed";
+}
+
+jsSources = [
 	"components/scripts/hello.js",
 	"components/scripts/world.js"
 ];
 
-var sassSources = ["components/sass/style.scss"];
-var htmlSources = ["builds/development/*.html"];
+sassSources = ["components/sass/style.scss"];
+htmlSources = [outputDir + "*.html"];
 
 gulp.task("js", function() {
 	return gulp.src(jsSources)
 		.pipe(concat("main.js"))
 		.pipe(browserify())
-		.pipe(gulp.dest("builds/development/js"))
+		.pipe(gulp.dest(outputDir + "js"))
 		.pipe(connect.reload())
 });
 
 gulp.task("sass", function() {
 	return gulp.src(sassSources)
-		.pipe(sass({outputStyle: "expanded"})
+		.pipe(sass({outputStyle: sassStyle})
 			.on('error', sass.logError))
-		.pipe(gulp.dest('builds/development/css'))
+		.pipe(gulp.dest(outputDir + "css"))
 		.pipe(connect.reload())
 });
 
@@ -37,7 +56,7 @@ gulp.task("watch", function() {
 
 gulp.task("connect", function() {
 	connect.server({
-		root: 'builds/development',
+		root: outputDir,
 		livereload: true
 	})
 });
