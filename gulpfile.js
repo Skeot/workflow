@@ -1,5 +1,6 @@
 const gulp = require("gulp"),
 	  gutil = require("gulp-util"),
+	  browserify = require("gulp-browserify"),
 	  concat = require("gulp-concat");
 
 var jsSources = [
@@ -10,5 +11,6 @@ var jsSources = [
 gulp.task("js", function() {
 	gulp.src(jsSources)
 		.pipe(concat("main.js"))
+		.pipe(browserify())
 		.pipe(gulp.dest("builds/development/js"))
 });
