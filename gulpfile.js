@@ -1,6 +1,5 @@
 var gulp = require("gulp"),
 	gutil = require("gulp-util"),
-	browserify = require("gulp-browserify"),
 	connect = require("gulp-connect"),
 	concat = require("gulp-concat"),
 	gulpif = require("gulp-if"),
@@ -38,7 +37,6 @@ htmlSources = [outputDir + "*.html"];
 gulp.task("js", function() {
 	return gulp.src(jsSources)
 		.pipe(concat("main.js"))
-		.pipe(browserify())
 		.pipe(gulpif(env === "production", uglify()))
 		.pipe(gulp.dest(outputDir + "js"))
 		.pipe(connect.reload())
