@@ -12,7 +12,7 @@ var jsSources = [
 var sassSources = ["components/sass/style.scss"];
 
 gulp.task("js", function() {
-	gulp.src(jsSources)
+	return gulp.src(jsSources)
 		.pipe(concat("main.js"))
 		.pipe(browserify())
 		.pipe(gulp.dest("builds/development/js"))
@@ -20,6 +20,9 @@ gulp.task("js", function() {
 
 gulp.task("sass", function() {
 	return gulp.src(sassSources)
-		.pipe(sass().on('error', sass.logError))
+		.pipe(sass({outputStyle: "expanded"})
+			.on('error', sass.logError))
 		.pipe(gulp.dest('builds/development/css'));
 });
+
+gulp.task("default", ["js", "sass"])
