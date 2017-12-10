@@ -15,7 +15,7 @@ gulp.task("js", function() {
 	return gulp.src(jsSources)
 		.pipe(concat("main.js"))
 		.pipe(browserify())
-		.pipe(gulp.dest("builds/development/js"))
+		.pipe(gulp.dest("builds/development/js"));
 });
 
 gulp.task("sass", function() {
@@ -25,4 +25,10 @@ gulp.task("sass", function() {
 		.pipe(gulp.dest('builds/development/css'));
 });
 
+gulp.task("watch", function() {
+	gulp.watch(jsSources, ["js"]);
+	gulp.watch("components/sass/*.scss", ["sass"]);
+});
+
 gulp.task("default", ["js", "sass"])
+
