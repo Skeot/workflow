@@ -1,1 +1,5 @@
-console.log("Hello");
+const testEs = () => {
+  console.log('Hello')
+}
+
+testEs()

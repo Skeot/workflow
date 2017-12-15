@@ -1,1 +1,1 @@
-console.log("Hello"),console.log("world");
+"use strict";var testEs=function(){console.log("Hello")};testEs(),console.log("world");
